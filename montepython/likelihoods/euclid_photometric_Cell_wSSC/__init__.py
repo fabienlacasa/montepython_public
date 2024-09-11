@@ -25,7 +25,7 @@ import numpy as np
 import warnings
 from scipy.special import erf
 
-class euclid_photometric_alm(Likelihood):
+class euclid_photometric_Cell_wSSC(Likelihood):
 
     # Initialization performed a single time at the beginning of the run
 
@@ -34,7 +34,7 @@ class euclid_photometric_alm(Likelihood):
         Likelihood.__init__(self, path, data, command_line)
 
         # Force the cosmological module to store Pk for redshifts up to
-        # euclid_photometric_alm.zmax and for k up to euclid_photometric_alm.k_max_h_by_Mpc
+        # euclid_photometric_Cell_wSSC.zmax and for k up to euclid_photometric_Cell_wSSC.k_max_h_by_Mpc
         self.need_cosmo_arguments(data, {'output': 'mPk, dTk'})
         self.need_cosmo_arguments(data, {'z_max_pk': self.zmax})
         self.need_cosmo_arguments(data, {'P_k_max_1/Mpc': 1.5*self.k_max_h_by_Mpc})
@@ -72,7 +72,7 @@ class euclid_photometric_alm(Likelihood):
         #################################################
 
         # Create the array that will contain the z boundaries for each bin.
-        # Hard-coded, excepted the lowest and highest boundaries passed in euclid_photometric_alm.data
+        # Hard-coded, excepted the lowest and highest boundaries passed in euclid_photometric_Cell_wSSC.data
         self.z_bin_edge = np.array([self.zmin, 0.418, 0.560, 0.678, 0.789, 0.900, 1.019, 1.155, 1.324, 1.576, self.zmax])
         self.z_bin_center = np.array([(self.z_bin_edge[i]+self.z_bin_edge[i+1])/2 for i in range(self.nbin)])
 
@@ -448,14 +448,14 @@ class euclid_photometric_alm(Likelihood):
 
         # do you want to save the power spectrum?
         if self.save_PS:
-            debug_file_path = os.path.join( self.data_directory, 'euclid_photometric_alm_Pkz.npz')
+            debug_file_path = os.path.join( self.data_directory, 'euclid_photometric_Cell_wSSC_Pkz.npz')
             # loading the file yields P(k,z), k(ell,z), z
             np.savez(debug_file_path, Pk_WL=Pk_WL, Pk_GC=Pk_GC, k=k, z=self.z)
             print("Printed P(k,z)")
 
         # do you want to save the (noise-free) Cl?
         if self.save_Cell:
-            debug_file_path = os.path.join(self.data_directory, 'euclid_photometric_alm_Cls.npz')
+            debug_file_path = os.path.join(self.data_directory, 'euclid_photometric_Cell_wSSC_Cls.npz')
             if 'WL_GCph_XC' in self.probe:
                 np.savez(debug_file_path, ells_LL=self.l_WL, ells_GG=self.l_GC, ells_GL=self.l_XC, Cl_LL = Cl_LL, Cl_GG = Cl_GG, Cl_GL = Cl_GL)
             if 'WL' in self.probe:

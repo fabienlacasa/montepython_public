@@ -1,6 +1,6 @@
 #####################################################
 # Module dealing with (optional) theoretical errors #
-# in the euclid_photometric_alm likelihood              #
+# in the euclid_photometric_Cell_wSSC likelihood    #
 #####################################################
 
 # Reflects the theoretical error model described in [1210.2194],

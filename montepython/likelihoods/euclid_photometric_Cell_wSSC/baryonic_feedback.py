@@ -1,5 +1,5 @@
 ######################################################################################################
-# Interface module between euclid_photometric_alm likelihood and BCemu emulator of baryonic feedback #
+# Interface module between euclid_photometric_Cell_wSSC likelihood and BCemu emulator of baryonic feedback #
 ######################################################################################################
 
 # BCemu python package available at https://github.com/sambit-giri/BCemu
